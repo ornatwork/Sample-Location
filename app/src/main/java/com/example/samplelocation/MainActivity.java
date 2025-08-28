@@ -114,7 +114,13 @@ public class MainActivity extends AppCompatActivity {
                     );
                 }
                 if (clickText != null) {
-                    clickText.setText("http://maps.google.com/maps?q=loc:" + latitude + "," + longitude);
+                    clickText.setText("Open in Maps");
+                    clickText.setPaintFlags(clickText.getPaintFlags() | android.graphics.Paint.UNDERLINE_TEXT_FLAG);
+                    clickText.setOnClickListener(v -> {
+                        String url = "http://maps.google.com/maps?q=loc:" + latitude + "," + longitude;
+                        Intent intent = new Intent(Intent.ACTION_VIEW, android.net.Uri.parse(url));
+                        v.getContext().startActivity(intent);
+                    });
                 }
 
                 fetchWeather("https://api.openweathermap.org/data/2.5/weather?lon="
@@ -349,7 +355,11 @@ public class MainActivity extends AppCompatActivity {
 
             String text = String.format(
                     Locale.US,
-                    "Weather in %s\n%s, %.0f°F (feels %.0f°F)\nHumidity: %s%% • \nPressure: %.0f hPa\nWind: %.0f mph %s",
+                    "Weather in %s\n" +
+                            "%s, %.0f°F (feels %.0f°F)\n" +
+                            "Humidity: %s%% \n" +
+                            "Pressure: %.0f hPa\n" +
+                            "Wind: %.0f mph %s",
                     name,
                     capitalize(description),
                     tempF,
