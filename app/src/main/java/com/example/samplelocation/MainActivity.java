@@ -123,9 +123,10 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }
 
-                fetchWeather("https://api.openweathermap.org/data/2.5/weather?lon="
-                        + longitude + "&lat=" + latitude +
-                        "&appid=d1437fe63b9165a5569c09489f6c69f8&units=imperial");
+                fetchWeather("https://api.openweathermap.org/data/2.5/weather?" +
+                        "lon=" + longitude + "&lat=" + latitude +
+                        "&appid=" + getString(R.string.app_id) +
+                        "&units=imperial");
            }
         };
 
